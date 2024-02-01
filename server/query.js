@@ -32,10 +32,11 @@ app.post("/name", (request, response) => {
   try {
     const name = request.body.name;
     const message = request.body.message;
+    const url = request.body.url
 
     const newName = db
-      .prepare(`INSERT INTO messages (name, message) VALUES (?,?)`)
-      .run(name, message);
+      .prepare(`INSERT INTO messages (name, message, url) VALUES (?,?,?)`)
+      .run(name, message, url);
     response.status(200).json(newName);
     return;
   } catch (err) {
